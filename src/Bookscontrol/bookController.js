@@ -1,4 +1,4 @@
-const bookSchema= require("../models/bookSchema")
+const bookSchema= require("../Books/bookSchema")
 
 const createbook= async function (req, res) {
     let data= req.body
@@ -7,8 +7,8 @@ const createbook= async function (req, res) {
 }
 
 const getbookData= async function (req, res) {
-    let allUsers= await bookSchema.find()
-    res.send({msg: allUsers})
+    let allBook= await bookSchema.find()
+    res.send({msg: allBook})
 }
 
 module.exports.createbook= createbook
