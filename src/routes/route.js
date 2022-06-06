@@ -1,19 +1,21 @@
 const express = require('express');
-const _ = require('lodash');
-const bookSchema= require("../Books/bookSchema");
-const BookController= require("../Bookscontrol/bookController");
-
-
 const router = express.Router();
+const UserModel= require("../models/userModels")
+const UserController= require("../controllers/userController")
 
+const bookModel= require("../models/bookModel")
+const BookController= require("../controllers/bookController")
 
-router.get('/test-me', function (req, res) {
-    res.send("My First MongoDB API!!!!");
-});
+router.get("/test-me", function (req, res) {
+    res.send("My first ever api!")
+})
 
-router.post("/createbook", BookController.createbook  )
+router.post("/createUser", UserController.createUser  )
 
-router.get("/getbookData", BookController.getbookData)
+router.get("/getUsersData", UserController.getUsersData)
+
+router.post("/createBook", BookController.createBook  )
+
+router.get("/getBooksData", BookController.getBooksData)
 
 module.exports = router;
-// adding this comment for no reason
