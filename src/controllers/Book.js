@@ -1,6 +1,6 @@
 const bookModel= require("../models/bookModel");
 const AuthorModel= require("../models/AuthorModel");
-const res = require("express/lib/response");
+
 
 const createAuthor= async function (req, res) {
     let data= req.body
