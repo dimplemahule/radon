@@ -4,7 +4,8 @@ const router = express.Router();
 // const UserController= require("../controllers/userController")
 
 const bookModel= require("../models/bookModel")
-const BookController= require("../controllers/bookController")
+const bookAuthor= require("../models/AuthorModel")
+const Book= require("../controllers/Book")
 
 
 
@@ -16,14 +17,13 @@ router.get("/test-me", function (req, res) {
 
 // router.get("/getUsersData", UserController.getUsersData)
 
-router.post("/createBook", BookController.createBook  )
-router.get("/getBooksData", BookController.getBooksData)
-router.get("/booklist", BookController.booklist)
+router.post("/createAuthor", Book.createAuthor)
+router.post("/createBook", Book.createBook)
 
-router.get("/getBooksInYear", BookController.getBooksInYear)
-router.get("/getParticularBooks", BookController.getParticularBooks)
-router.get("/getRsBooks", BookController.getRsBooks)
-router.get("/getRandomBooks", BookController.getRandomBooks)
+router.get("/getBooksbyChetanBhat", Book.getBooksbyChetanBhat)
+router.post("/authorOfbooks", Book.authorOfbooks)
+router.get("/Finddata", Book.Finddata)
+
 
 
 
