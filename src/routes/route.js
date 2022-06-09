@@ -15,6 +15,7 @@ router.post("/newAthourdata", bookController.newAthourdata)
 router.post("/newBookData", bookController.newBookData)
 router.post("/newPublisherdata", bookController.newPublisherdata)
 router.get("/populateBook",bookController.populateBook)
+router.get("/getAuthorData", bookController.getAuthorData)
 
 
 
