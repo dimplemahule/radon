@@ -26,6 +26,10 @@ router.get("/test-me", function (req, res) {
 // router.post("/authorOfbooks", Book.authorOfbooks)
 // router.get("/Finddata", Book.Finddata)
 
+router.post("/newAthourdata", populateref.newAthourdata)
+router.post("/newBookData", populateref.newBookData)
+router.post("/newPublisherdata", populateref.newPublisherdata)
+
 
 
 
