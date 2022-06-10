@@ -32,7 +32,7 @@ const newBookData= async function (req, res) {
     let publisher = await newPublisher.findById(newpublisher_id)
     
     if (!publisher){
-        return res.send("Author dose not exits")
+        return res.send(" publisher dose not exits")
     }
     let bookCreated = await newBook.create(book)
     res.send({data: bookCreated})
@@ -46,8 +46,13 @@ const populateBook = async function (req, res){
 }
 
 const getAuthorData = async function(req, res){
-    let authors =  await newAuthor.find({rating:{$gte:3.5}}).select("_id")
-    res.send({msg:authors})
+   let authors =  await newAuthor.find({rating:{$gte:3.5}}).select("_id")
+    let key = await newBook.updateMany(
+        {price:{$lt:50}},{
+            $set:{price:60}
+        }
+    )
+    res.send({msg:key})
 }
 
 
