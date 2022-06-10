@@ -45,19 +45,26 @@ const populateBook = async function (req, res){
 
 }
 
-const getAuthorData = async function(req, res){
-   let authors =  await newAuthor.find({rating:{$gte:3.5}}).select("_id")
-    let key = await newBook.updateMany(
-        {price:{$lt:50}},{
-            $set:{price:60}
-        }
-    )
-    res.send({msg:key})
+const Upadatekey=async function(req,res){
+    let data=await newPublisher.find({name:"HarperCollins"}).select("_id")
+    let data2=await newPublisher.find({name:"Penguin"}).select("_id")
+    let UpdateHardCover=await newBook.updateMany({newpublisher_id:data},{$set:{isHardCover:true}})
+    let UpdateHardCover2=await newBook.updateMany({newpublisher_id:data2},{$set:{isHardCover:true}})
+    res.send({msg:UpdateHardCover,UpdateHardCover2})
 }
+
+const Upadateprice =async function (req, res) {
+    let authorRating = await newAuthor.find({rating:{$gt:3.5}}).select("_id")
+    let updatedprice= await newBook.updateMany({author_id:authorRating}, {$inc: {price:+10}})
+    res.send({data:updatedprice })
+
+}
+
 
 
 module.exports.newAthourdata= newAthourdata
 module.exports.newPublisherdata = newPublisherdata
 module.exports.newBookData = newBookData
 module.exports.populateBook = populateBook
-module.exports.getAuthorData = getAuthorData
+module.exports.Upadatekey = Upadatekey
+module.exports.Upadateprice = Upadateprice
