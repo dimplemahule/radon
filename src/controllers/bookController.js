@@ -2,6 +2,22 @@ const newAuthor = require("../models/newAuthor")
 const newPublisher = require("../models/newPublisher")
 const newBook = require("../models/newBook")
 
+// const midd = require("../middelewere/middelewere")
+
+// const { times } = require("lodash")
+
+// const basicRout = async function (req, res, next){
+
+//         let a = new Date();
+//         let IP = req.socket.remoteAddress;
+//         let API = req.path;
+//         console.log (a + "," + IP + "," + API), next();
+    
+
+//     res.send({ msg: "Basic Router middelewere"})
+//     }
+
+
 const newAthourdata= async function (req, res) {
     let book = req.body
     let bookCreated = await newAuthor.create(book)
@@ -68,3 +84,4 @@ module.exports.newBookData = newBookData
 module.exports.populateBook = populateBook
 module.exports.Upadatekey = Upadatekey
 module.exports.Upadateprice = Upadateprice
+module.exports.basicRout = basicRout
