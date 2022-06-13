@@ -1,5 +1,6 @@
 const UseModel= require("../models/useModel")
 const productModel = require("../models/productModel")
+const orderModel = require("../models/orderModel")
 
 // const basicCode= async function(req, res, next) {
 //     let tokenDataInHeaders= req.headers.token
@@ -30,13 +31,18 @@ const productModel = require("../models/productModel")
 
 const createUse= async function (req, res) {
         let data= req.body
-        let savedData= await UserModel.create(data)
+        let savedData= await UseModel.create(data)
         res.send({msg: savedData})
     }
     const productUser= async function (req, res) {
         let data= req.body
-        let productData= await UserModel.create(data)
+        let productData= await productModel.create(data)
         res.send({msg: productData})
+    }
+    const orderUser= async function (req, res){
+        let data= req.body
+        let orderData= await orderModel.create(data)
+        res.send({msg: orderData})
     }
 
 
@@ -47,5 +53,6 @@ const createUse= async function (req, res) {
 
 module.exports.createUse= createUse
 module.exports.productUser= productUser
+module.exports.orderUser= orderUser
 //module.exports.getUsersData= getUsersData
 // module.exports.basicCode= basicCode
