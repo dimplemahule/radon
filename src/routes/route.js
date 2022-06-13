@@ -15,7 +15,8 @@ router.get("/test-me", function (req, res) {
 
     router.post("/createUse", commonMW.mid1, UserController.createUse)
     router.post("/productUser",UserController.productUser)
-    router.post("/orderUser",UserController.orderUser)
+    router.post("/orderUser", UserController.orderUser)
+    
 
 // router.get("/getUsersData", UserController.getUsersData)
 // const mid1= function ( req, res, next) {

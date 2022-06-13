@@ -1,17 +1,35 @@
 
 const mid1= function ( req, res, next) {
-   
-    let header = req.headers.isfreeappuser
-    if(!header){
-        res.send("error")
-    }else{
-        next()
+
+    let headers = req.headers
+    let appType = headers["isFreeAppUser"]
+    if(!appType) {
+        appType = headers["isfreeappuser"]
     }
-        
+    if(!appType) {
+        return res.send({status: false, message: "A mandatory header is missing"})
+    }
+    //let appTypeFree = Boolean(appType)//This works on truthy/falsy
+    if(appType == 'true') {
+        req.appTypeFree = true
+    } else {
+        req.appTypeFree = false
+    }
+    next()
+
+}
+    // let header = req.headers.isfreeappuser
+    // if(!header){
+    //     res.send("error")
+    // }else{
+    //     next()
+    // }
+      
+   
     // req.falana= "hi there. i am adding something new to the req object"
     // console.log("Hi I am a middleware named Mid1")
    
-}
+
 
 const mid2= function ( req, res, next) {
     console.log("Hi I am a middleware named Mid2")
