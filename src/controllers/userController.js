@@ -58,7 +58,7 @@ const putUser = async function(req, res){
         let userId = req.params.userId;
         let userDetails = await userModel.findById(userId);
         if(!userDetails) return res.send({status: false, msg:" No such user exit"});
-        let putData = await userModel.findOneAndUpdate({_id:userDetails},{data},{new:true})
+        let putData = await userModel.findOneAndUpdate({_id:userDetails},data,{new:true})
         res.send({status:true, data: putData});
 }
 
