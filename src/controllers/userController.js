@@ -1,4 +1,4 @@
-const UseModel= require("../models/useModel")
+
 const productModel = require("../models/productModel")
 const orderModel = require("../models/orderModel")
 const useModel = require("../models/useModel")
@@ -32,7 +32,7 @@ const useModel = require("../models/useModel")
 
 const createUse= async function (req, res) {
         let data= req.body
-        let savedData= await UseModel.create(data)
+        let savedData= await useModel.create(data)
         res.send({msg: savedData})
     }
     const productUser= async function (req, res) {
@@ -40,35 +40,45 @@ const createUse= async function (req, res) {
         let productData= await productModel.create(data)
         res.send({msg: productData})
     }
-    const orderUser= async function (req, res){
-        let orderDetails = req.body
-        let userId = orderDetails.userId
-        let productId = orderDetails.productId
-        let user = await useModel.findById(userId)
-        if(!user) {
-            return res.send({status: false, message: "user doesnt exist"})
-        }
-        let product = await productModel.findById(productId)
-        if(!product) {
-            return res.send({status: false, message: "product doesnt exist"})
-        }
-        //Scenario 1 : Paid app and user balance is greater than or equal to product price
-        // if(!req.appTypeFree && user.balance >= product.price) {
-        //     user.balance = user.balance - product.price
-        //     await user.save()
-        //     orderDetails.amount = product.price
-        //     orderDetails.isFreeAppUser = false
-        //     let orderCreated = await orderModel.create(orderDetails)
-        //     return res.send({status: true, data :orderCreated})
-        // } else if(!req.appTypeFree) {
-        // //Scenario 2 : Paid app and user balance is less than product price
-        //     return res.send({status: false, message:"User deosnt have sufficient balance"})
-        // } else {
-        // //Scenario 3 : Free app
-        //     orderDetails.amount = 0
-        //     orderDetails.isFreeAppUser = true
-        //     let orderCreated = await orderModel.create(orderDetails)
-            res.send({status: true, data: orderCreated})
+
+        const createOrder = async function(req, res) {
+            let orderDetails = req.body
+            let userId = orderDetails.userId
+            let productId = orderDetails.productId
+            let user = await useModel.findById(userId)
+            if(!user) {
+                return res.send({status: false, message: "user doesnt exist"})
+            }
+        
+            let product = await productModel.findById(productId)
+            if(!product) {
+
+                return res.send({status: false, message: "product doesnt exist"})
+                
+            }
+            
+            //=========Scenario 1 : Paid app and user balance is greater than or equal to product price
+
+            if(!req.appTypeFree && user.balance >= product.price) {
+                user.balance = user.balance - product.price
+                await user.save()
+        
+                orderDetails.amount = product.price
+                orderDetails.isFreeAppUser = false
+                let orderCreated = await orderModel.create(orderDetails)
+                return res.send({status: true, data :orderCreated})
+            } else if(!req.appTypeFree) {
+
+            //========Scenario 2 : Paid app and user balance is less than product price===
+
+                return res.send({status: false, message:"User deosnt have sufficient balance"})
+            } else {
+            //====================Scenario 3 : Free app=====================
+                orderDetails.amount = 0
+                orderDetails.isFreeAppUser = true
+                let orderCreated = await orderModel.create(orderDetails)
+                res.send({status: true, data: orderCreated})
+            }
         }
     
 
@@ -79,6 +89,4 @@ const createUse= async function (req, res) {
 
 module.exports.createUse= createUse
 module.exports.productUser= productUser
-module.exports.orderUser= orderUser
-//module.exports.getUsersData= getUsersData
-// module.exports.basicCode= basicCode
+module.exports.createOrder= createOrder
