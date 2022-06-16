@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema( {
     },
     age: Number,
    posts: {
-    type: ["hiii"], 
+    type: [], 
     deafult: []
 }
 }, { timestamps: true });

@@ -11,7 +11,7 @@ router.get("/test-me", function (req, res) {
 
 router.post("/users", userController.createUser)
 router.post("/login", userController.loginUser)
-router.post("/users/:userId/posts",  auth.authenticate, auth.authorise, userController.postMessage)
+router.post("/users/:userId/posts",  auth.jwtValidation, auth.authorise, userController.postMessage)
 
 router.get("/users/:userId", auth.jwtValidation, userController.getUserData)
 
