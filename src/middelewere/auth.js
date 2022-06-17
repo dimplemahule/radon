@@ -11,33 +11,32 @@ const jwtValidation = function(req, res, next){
     next()
   }
 
-  const authenticate = function(req, req, next) {
-        //check the token in request header
-        let token = req.headers["x-auth-token"];
-        if(!token) return res.send({status:false, msg:"token must be preset"});
-        let decodetoken = jwt.verify(token, "Function-Up radon");
-        if(!decodetoken) return res.send({status: false, msg:"your decode token is invalid"});
+  // const authenticate = function(req, req, next) {
+  //       //check the token in request header
+  //       let token = req.headers["x-auth-token"];
+  //       if(!token) return res.send({status:false, msg:"token must be preset"});
+  //       let decodetoken = jwt.verify(token, "Function-Up radon");
+  //       if(!decodetoken) return res.send({status: false, msg:"your decode token is invalid"});
     
-    //     //validate this token
+  //   //     //validate this token
     
-       next()
-     }
+  //      next()
+  //    }
     
     const authorise = function(req, res, next) {
-      // comapre the logged in user's id and the id in request
-      let token = req.headers["x-auth-token"]
-      if(!token) return res.send({status: false, msg: "token must be present in the request header"})
-      let decodedToken = jwt.verify(token, 'Function-Up radon')
-      if(!decodedToken) return res.send({status: false, msg:"token is not valid"})
+      let token = req.headers["x-auth-token"];
+      if(!token) return res.send({status:false, msg:"token must be preset"});
+      let decodetoken = jwt.verify(token, "Function-Up radon");
+      if(!decodetoken) return res.send({status: false, msg:"your decode token is invalid"});
       let userToBeModified = req.params.userId
-      let userLoggedIn = decodedToken.userId
+      let userLoggedIn = decodetoken.userId
       if(userToBeModified != userLoggedIn) return res.send({status: false, msg: 'User logged is not allowed to modify the requested users data'})
       
          next()
      }
 
 module.exports.jwtValidation = jwtValidation
-module.exports.authenticate = authenticate
+//module.exports.authenticate = authenticate
 module.exports.authorise = authorise
  
 
