@@ -40,16 +40,6 @@ const createUser = async function (req, res) {
   }
 
 
-
-
-
-
-
-
-
-
-
-
 //========================Delete the perticular isDeleted:true===========
 
 const deleteUser = async function(req, res){
