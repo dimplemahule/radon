@@ -1,4 +1,6 @@
 const authorModel = require("../models/authorModel");
+//const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken");
 const validateEmail = function (email) {
     return (/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,20}$/).test(email)
 }
@@ -45,5 +47,24 @@ const createAuthor = async (req, res) => {
 }
 
 
+//===============================================login Author==========================
 
-  module.exports.createAuthor = createAuthor;
+const loginauthor = async function (req, res){
+  try{
+    let authorEmail = req.body.email;
+    let password = req.body.password;
+    let author = await authorModel.findOne({email:authorEmail, password:password});
+    if(!author) return res.status(404).send({status: false, msg:"username & password is not corerct",});
+    let token = jwt.sign({authorId: author._id.toString(),batch:"Radon", organization:"FunctionUp"}, "Function-Up radon");
+    res.setHeader("x-api-key", token);
+    return res.status(200).send({status:true, token: token});
+  }
+  catch (err) {
+    res.status(500).send({ status: false, error: err.message });
+  }
+};
+
+
+
+  module.exports ={createAuthor,loginauthor} ;
+  

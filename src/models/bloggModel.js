@@ -43,4 +43,4 @@ isPublished: {
     default: false
 }
 },{timestamps:true})
-module.exports = mongoose.model("Blog", blogSchema)
+module.exports = mongoose.model("Project1Blogging", blogSchema)
